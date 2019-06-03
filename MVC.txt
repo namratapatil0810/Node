@@ -1,0 +1,6 @@
+model fetch, save data work with data
+
+when to fetch when to save when to render handle by controller
+(controller connect view and model)
+
+view display what user will be see

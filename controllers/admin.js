@@ -16,8 +16,15 @@ exports.postAddProduct = (req, res, next) => {
   const price = req.body.price;
   const description = req.body.description;
   const product = new Product(null, title, imageUrl, price, description);
-  product.save();
-  res.redirect("/");
+  product
+    .save()
+    .then(result => {
+      console.log("product added");
+      res.redirect("/admin/products");
+    })
+    .catch(error => {
+      console.log("error admin.js controllpage");
+    });
 };
 
 //redirecting to edit product page
@@ -60,12 +67,14 @@ exports.postEditProduct = (req, res, next) => {
 
 //getting products on admin side
 exports.getProducts = (req, res, next) => {
-  Product.fetchAll(products => {
+  Product.fetchAll().then(products => {
     res.render("admin/products", {
       prods: products,
       pageTitle: "Products",
       path: "/admin/products"
     });
+  }).catch(error=>{
+    console.log("error");
   });
 };
 

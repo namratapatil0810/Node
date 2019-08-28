@@ -5,13 +5,16 @@ const router = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
 const path = require("path");
 const app = express();
-const mongoConnect = require("./util/database");
+const mongoConnect = require("./util/database").mongoConnect;
 
 const errorController = require("./controllers/error");
 /* const db = require("./util/database"); */
 
 app.set("view engine", "ejs");
 app.set("views", "views");
+app.use((req, res, next) =>{
+  next();
+})
 
 /*
 db.execute("SELECT * FROM products where id = 1")
@@ -22,12 +25,12 @@ db.execute("SELECT * FROM products where id = 1")
     console.log(err);
   });
 */
-/*
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
-*/
-//app.use("/admin", router);
-//app.use(shopRoutes);
+
+app.use("/admin", router);
+app.use(shopRoutes);
 
 app.use(errorController.error404);
 

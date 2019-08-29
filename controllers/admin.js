@@ -11,6 +11,7 @@ exports.getAddProduct = (req, res, next) => {
 
 //after adding product || on add product click
 exports.postAddProduct = (req, res, next) => {
+  
   const title = req.body.title;
   const imageUrl = req.body.imageUrl;
   const price = req.body.price;

@@ -35,6 +35,6 @@ app.use(shopRoutes);
 app.use(errorController.error404);
 
 mongoConnect(client => {
-  console.log(client);
+  //console.log(client);
   app.listen(3000);
 });

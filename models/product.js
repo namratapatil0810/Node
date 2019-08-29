@@ -35,7 +35,7 @@ module.exports = class Product {
       .collection("products")
       .insertOne(this)
       .then(result => {
-        console.log(result);
+        console.log("result"+result);
       })
       .catch(error => {
         console.log(error);
@@ -49,7 +49,7 @@ module.exports = class Product {
     .collection("products")
     .find().toArray()
       .then(result => {
-        console.log(result);
+        //console.log(result);
         return result;
       })
       .catch(error => {

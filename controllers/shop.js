@@ -4,22 +4,30 @@ const Cart = require("../models/cart");
 exports.getProducts = (req, res, next) => {
   Product.fetchAll()
     .then(products => {
-      res.send(JSON.stringify(products));
+      res.render("shop/product-list", {
+        prods: products,
+        pageTitle: "Prodcuts",
+        path: "/products"
+      });
     })
     .catch(error => {
-      console.log(error);
+      console.log("error");
     });
 };
 
 exports.getProduct = (req, res, next) => {
   const prodId = req.params.productId;
-  Product.findById(prodId, product => {
-    res.render("shop/product-detail", {
-      product: product,
-      pageTitle: product.title,
-      path: "/products"
+  Product.findById(prodId)
+    .then(product => {
+      res.render("shop/product-detail", {
+        product: product,
+        pageTitle: product.title,
+        path: "/products"
+      });
+    })
+    .catch(error => {
+      console.log("error");
     });
-  });
 };
 
 exports.getIndex = (req, res, next) => {
